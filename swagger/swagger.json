@@ -1,0 +1,122 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "notes micro-service"
+    },
+    "basePath": "/",
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/api/v1/notes": {
+        "post": {
+          "summary": "Create a Note",
+          "operationId": "createNote",
+          "parameters": [
+            {
+                "name": "note",
+                "in": "body",
+                "description": "Create a note",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/CreateNote"
+                }
+            }
+          ],
+          "responses": {
+            "success": {
+                "description": "Create a note",
+                "schema": {
+                  "example": {
+                    "title": "example title",
+                    "content": "Note contents",
+                    "notesId": "N_db231277-701d-4a92-9c87-59a0743f200e",
+                    "createdAt": "2021-06-20T04:08:11.418Z",
+                    "updatedAt": "2021-06-20T04:08:11.418Z"
+                  }
+                }
+              }
+          }
+        }
+      },
+      "/api/v1/notes/{notesId}": {
+        "put": {
+          "summary": "Update note's title, content",
+          "operationId": "updateNote",
+          "parameters": [
+            {
+              "name": "notesId",
+              "in": "path",
+              "description": "Internally generated id",
+              "required": true
+            },
+            {
+                "name": "note",
+                "in": "body",
+                "description": "Update a note",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/CreateNote"
+                }
+            }
+          ],
+          "responses": {
+            "success": {
+              "description": "Update a note",
+              "schema": {
+                "example": {
+                  "title": "new title",
+                  "content": "updated content",
+                  "notesId": "N_db231277-701d-4a92-9c87-59a0743f200e",
+                  "createdAt": "2021-06-20T04:08:11.418Z",
+                  "updatedAt": "2021-06-20T04:08:11.418Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+        "CreateNote": {
+            "type": "object",
+            "required": [
+              "title"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              }
+            }
+          },
+      "Query": {
+        "required": [
+          "startTime",
+          "endTime"
+        ],
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sorting": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
