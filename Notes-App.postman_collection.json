@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "99d0816c-25d2-4bc6-bf8d-479fcb487a19",
+		"name": "Notes-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Note",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"notesId\", jsonData.notesId);",
+							"postman.setEnvironmentVariable(\"value\", jsonData.value);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT token",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"My very first note\",\n    \"content\": \"Note contents go in here.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9997/api/v1/notes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9997",
+					"path": [
+						"api",
+						"v1",
+						"notes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Note",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "JWT token",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"My very first note update\",\n    \"content\": \"Updating - Note contents go in here.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9997/api/v1/notes/{{notesId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9997",
+					"path": [
+						"api",
+						"v1",
+						"notes",
+						"{{notesId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Notes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "JWT token",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9997/api/v1/notes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9997",
+					"path": [
+						"api",
+						"v1",
+						"notes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Notes By Word",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"search\": \"nO\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9997/api/v1/notes/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9997",
+					"path": [
+						"api",
+						"v1",
+						"notes",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Notes",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "JWT token",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"notesIds\": [\"{{notesId}}\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9997/api/v1/notes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9997",
+					"path": [
+						"api",
+						"v1",
+						"notes",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "notesId",
+			"value": "N_87b7667b-a438-4e4c-8c94-2301f2d14f6b"
+		}
+	]
+}

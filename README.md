@@ -28,7 +28,8 @@ Node>=11.6.0 <br/>
 Swagger link - http://localhost:9997/swagger
 
 ## Postman collection
-<a href="Notes-App.postman_collection.json" download>Click to Download</a>
+<a href="Notes-App.postman_collection.json" download>Postman collection download</a>
+<a href="NotesApp-Local.postman_environment.json" download>Postman Environment download</a>
 
 ### Technical Details
 
