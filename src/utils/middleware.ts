@@ -26,9 +26,10 @@ export const reqIdInterceptor = (
   ) => {
     if (req && req.path && req.path.indexOf("/api") > -1) {
       const header = req.get(AUTHORIZATION_HEADER);
-      console.log(header);
       // TODO authentication and set userId on the request
-      req.XUserId = '12345';
+      if(!header) {
+        req.XUserId = `12345`;
+      }
     }
     next();
   };

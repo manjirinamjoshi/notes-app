@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "99d0816c-25d2-4bc6-bf8d-479fcb487a19",
+		"_postman_id": "056c47cb-cf52-48ef-9310-71027aae2e4c",
 		"name": "Notes-App",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -136,13 +136,13 @@
 			"response": []
 		},
 		{
-			"name": "Search Notes By Word",
+			"name": "Search Notes By Prefix",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"search\": \"nO\"\n}",
+					"raw": "{\n    \"prefix\": \"My Very\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

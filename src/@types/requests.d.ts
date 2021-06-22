@@ -4,8 +4,8 @@ declare namespace REQUESTS {
         content: string
     }
 
-    type NOTES_SEARCH_BY_WORD_BODY = {
-        search: string
+    type NOTES_SEARCH_BY_PREFIX_BODY = {
+        prefix: string
     }
 
     type NOTES_DELETE_BODY = {

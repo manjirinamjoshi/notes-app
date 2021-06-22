@@ -39,7 +39,7 @@ Note model
     "notesId" <Globally unique id representing a note>
     "title": <title of the note>,
     "content": <actual contents of the note>,
-    "userId": <logged in user>,
+    "userId": <note belongs to this user>,
     "createdAt": <note's creation timestamp>,
     "updatedAt": <note's last updated timestamp>
 }
@@ -57,7 +57,7 @@ Any logging produced will have the corresponding request-id associated for bette
 
 ## Assumptions
 
-### Note - UserId 
+### UserId 
 
 1. Assuming that user will be logged in and each REST api will be called with `Authorization` header.
 From the value of `Authorization` header, the code can be written to retrieve the  `userId`.
@@ -67,5 +67,8 @@ the `interceptor` implementation can be swapped with the real authentication log
 
 ### Searching notes
 
-1. Allows to search by prefix for any word in the title or the content of the note. For e.g. if the title is `This is my first note` and if the search string is `firs` then this note will be returned in the search result.
-2. Search is case-insensitve. For e.g if the content of the note is `Send an email ASAP`, and search string is `asap` then tihs note will be returned in the search result.
+1. Allows to search by prefix for any word in the `title` or `content` of the note. For e.g. if the title is `This is my first note` and if the search string is `firs` then this note will be returned in the search result.
+2. Search is case-insensitve. For e.g if the content of the note is `Send an email ASAP`, and search string is `asap` then this note will be returned in the search result.
+
+### Search Implementation Details
+

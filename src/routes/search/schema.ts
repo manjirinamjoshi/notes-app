@@ -1,7 +1,7 @@
 import { checkSchema, ParamSchema } from "express-validator";
 
 const createNoteSchema = {
-    search: {
+    prefix: {
         in: "body",
         isString: true,
         errorMessage: 'search string should be at least 1 char long and maximum of 50 chars',

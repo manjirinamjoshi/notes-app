@@ -1,13 +1,13 @@
 import { searchNotes } from '../db/db';
 
 export default async (
-    requestPayload: REQUESTS.NOTES_SEARCH_BY_WORD_BODY,
+    requestPayload: REQUESTS.NOTES_SEARCH_BY_PREFIX_BODY,
     requestId: string,
     userId: string
   ): Promise<REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE[]> => {
-    const { search } = requestPayload;
-    console.log(`RequestID=${requestId}, search note by string ${search}`);
-    const searchResults: MODELS.NOTE[] = await searchNotes(search.toLowerCase(), userId);
+    const { prefix } = requestPayload;
+    console.log(`RequestID=${requestId}, search note by string ${prefix}`);
+    const searchResults: MODELS.NOTE[] = await searchNotes(prefix.toLowerCase(), userId);
     // const responseArray: REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE[] = searchResults.map(({searchWords, id: notesId, ...keepAttrs}) => {keepAttrs} )
     const responseArray = searchResults.map((note) => {
         return {

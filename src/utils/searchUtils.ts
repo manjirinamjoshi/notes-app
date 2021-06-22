@@ -5,5 +5,6 @@ export const getSearchWords = async (
     let searchWords: string[] = [];
     searchWords = content ? searchWords.concat(content.toLowerCase().split(" ")): [];
     searchWords = searchWords.concat(title.toLowerCase().split(" "));
-    return searchWords;
+    const searchWordsSet = new Set(searchWords);
+    return Array.from(searchWordsSet);
 };
