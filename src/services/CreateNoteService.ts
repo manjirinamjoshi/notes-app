@@ -8,33 +8,24 @@ export default async (
     userId: string
   ): Promise<REQUESTS.NOTE_CREATE_SUCCESS_RESPONSE> => {
     const { title, content } = requestPayload;
-    console.log(requestId + " note title=" + title);
-    let createdAt = new Date().toISOString();
-    let updatedAt = new Date().toISOString();
+    console.log(`RequestID=${requestId}, creating note with title ${title}`);
+    const createdAt = new Date().toISOString();
+    const updatedAt = new Date().toISOString();
     const noteModel: MODELS.NOTE = {
-      id: notesId,
       title,
       content,
-      searchWords: await getSearchWords(title, content),
       userId,
       createdAt,
-      updatedAt
+      updatedAt,
+      id: notesId,
+      searchWords: await getSearchWords(title, content),
     };
     await createNote(noteModel);
     return {
         notesId,
         title,
         content,
-        createdAt: createdAt,
-        updatedAt: updatedAt
+        createdAt,
+        updatedAt
     };
   };
-
-  /*const getSearchWords = (title: string, content: string): Array<string> => {
-    let searchWords: Array<string> = [];
-    searchWords = content ? searchWords.concat(content.toLowerCase().split(" ")): [];
-    searchWords = searchWords.concat(title.toLowerCase().split(" "));
-    return searchWords;
-  };
-  */
-  

@@ -1,6 +1,6 @@
-//import * as express from "express";
+// import * as express from "express";
 import { Request, Response } from "express";
-//import { generateNoteUUID } from "../../utils/uuidGen";
+// import { generateNoteUUID } from "../../utils/uuidGen";
 import GetAllNotesService from "../../services/GetAllNotesService";
 
 export const getAllNotes = async (

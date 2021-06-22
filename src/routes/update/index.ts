@@ -1,4 +1,4 @@
-//import express from "express";
+// import express from "express";
 import * as express from "express";
 import { updateNote } from "./controller";
 import { updateValidation } from "./schema";
@@ -8,7 +8,7 @@ const registerApi = (router: express.Router): void => {
     "/api/v1/notes/:notesId",
     updateValidation,
     validationCatcher,
-    async function(req:any, res:any) {
+    async (req:any, res:any) => {
       await updateNote(req, res);
     }
   );

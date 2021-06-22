@@ -1,0 +1,15 @@
+{
+    "extends": [
+      "tslint-config-airbnb",
+      "tslint-config-prettier"
+    ],
+    "rules": {
+      "no-increment-decrement": false
+    },
+    "jsRules": {
+      "quotemark": [
+        true,
+        "single"
+      ]
+    }
+  }

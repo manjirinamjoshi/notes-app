@@ -1,4 +1,4 @@
-//import express from "express";
+// import express from "express";
 import * as express from "express";
 import { deleteNotes } from "./controller";
 import { deleteValidation } from "./schema";
@@ -8,7 +8,7 @@ const registerApi = (router: express.Router): void => {
     "/api/v1/notes/",
     deleteValidation,
     validationCatcher,
-    async function(req:any, res:any) {
+    async (req:any, res:any) => {
       await deleteNotes(req, res);
     }
   );

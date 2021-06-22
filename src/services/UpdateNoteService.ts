@@ -8,23 +8,23 @@ export default async (
     userId: string
   ): Promise<REQUESTS.NOTE_CREATE_SUCCESS_RESPONSE> => {
     const { title, content } = requestPayload;
-    console.log(requestId + " note title=" + title);
-    let updatedAt = new Date().toISOString();
+    console.log(`RequestID=${requestId}, updating note ${notesId}`);
+    const updatedAt = new Date().toISOString();
     const noteModel: MODELS.NOTE = {
-      id: notesId,
       title,
       content,
-      searchWords: await getSearchWords(title, content),
       userId,
-      updatedAt
+      updatedAt,
+      id: notesId,
+      searchWords: await getSearchWords(title, content),
     };
-    let updatedNoteResult: REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE = await updateNote(noteModel);
+    const updatedNoteResult: REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE = await updateNote(noteModel);
     return {
         notesId,
         title,
         content,
-        createdAt: updatedNoteResult.createdAt,
-        updatedAt: updatedAt
+        updatedAt,
+        createdAt: updatedNoteResult.createdAt
     };
   };
   

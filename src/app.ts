@@ -1,11 +1,11 @@
-//const config = require("config");
+// const config = require("config");
 import { Express } from "express";
 const express = require('express');
 
 import * as compression from "compression";
 import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
-//import healthcheck from "utils/healthcheck";
+// import healthcheck from "utils/healthcheck";
 
 import registerRoutes from "./routes/register-routes";
 import { reqIdInterceptor, authInterceptor } from "./utils/middleware";
@@ -15,7 +15,7 @@ const PORT: any = process.env.PORT || 9997;
 const router = require("express-promise-router")();
 const swaggerUi = require("swagger-ui-express");
 
-//healthcheck.init();
+// healthcheck.init();
 
 const app: Express = express()
   .set("port", PORT)

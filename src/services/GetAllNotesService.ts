@@ -4,8 +4,8 @@ export default async (
     requestId: string,
     userId: string
   ): Promise<REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE[]> => {
-    let allNotes = await getAllNotes(userId);
-    let responseArray = allNotes.map(function(note) {
+    const allNotes = await getAllNotes(userId);
+    const responseArray = allNotes.map((note) => {
         return {
             notesId: note.id,
             title: note.title,

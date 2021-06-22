@@ -50,11 +50,22 @@ Note model
 The user can create multiple notes with the same title. 
 Internally, the server generates a unique identifier everytime a note is created.
 
+### X-Request-Id
+
+Each request is intercepted and a unique "shortId" is generated that represents each request for traceability (for e.g. this microservice calls another ms then request-id will be passed along). 
+Any logging produced will have the corresponding request-id associated for better troubleshooting.
+
 ## Assumptions
+
+### Note - UserId 
 
 1. Assuming that user will be logged in and each REST api will be called with `Authorization` header.
 From the value of `Authorization` header, the code can be written to retrieve the  `userId`.
 2. The authentication logic is not implemented, so the code is using an `interceptor` that hardcodes the userId value. Later,
 the `interceptor` implementation can be swapped with the real authentication logic.
 3. For note update, delete and read operations, userId associated with the note is checked against the userId passed from the `interceptor`. This ensures that only notes belonging to the correct user are updated.
-4. 
+
+### Searching notes
+
+1. Allows to search by prefix for any word in the title or the content of the note. For e.g. if the title is `This is my first note` and if the search string is `firs` then this note will be returned in the search result.
+2. Search is case-insensitve. For e.g if the content of the note is `Send an email ASAP`, and search string is `asap` then tihs note will be returned in the search result.

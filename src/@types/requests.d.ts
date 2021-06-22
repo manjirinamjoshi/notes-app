@@ -9,7 +9,7 @@ declare namespace REQUESTS {
     }
 
     type NOTES_DELETE_BODY = {
-        notesIds: Array<GENERAL.NOTES_UUID>
+        notesIds: GENERAL.NOTES_UUID[]
     }
 
     type _GENERAL_RESPONSE = {

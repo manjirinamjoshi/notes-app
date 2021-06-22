@@ -3,7 +3,7 @@ declare namespace MODELS {
         id: GENERAL.NOTES_UUID;
         title: string;
         content: string;
-        searchWords: Array<string>;
+        searchWords: string[];
         userId: string;
         createdAt?: string;
         updatedAt?: string;

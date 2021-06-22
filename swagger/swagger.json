@@ -21,28 +21,28 @@
           "operationId": "createNote",
           "parameters": [
             {
-                "name": "note",
-                "in": "body",
-                "description": "Create a note",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/CreateNote"
-                }
+              "name": "note",
+              "in": "body",
+              "description": "Create a note",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CreateNote"
+              }
             }
           ],
           "responses": {
             "success": {
-                "description": "Create a note",
-                "schema": {
-                  "example": {
-                    "title": "example title",
-                    "content": "Note contents",
-                    "notesId": "N_db231277-701d-4a92-9c87-59a0743f200e",
-                    "createdAt": "2021-06-20T04:08:11.418Z",
-                    "updatedAt": "2021-06-20T04:08:11.418Z"
-                  }
+              "description": "Create a note",
+              "schema": {
+                "example": {
+                  "title": "example title",
+                  "content": "Note contents",
+                  "notesId": "N_db231277-701d-4a92-9c87-59a0743f200e",
+                  "createdAt": "2021-06-20T04:08:11.418Z",
+                  "updatedAt": "2021-06-20T04:08:11.418Z"
                 }
               }
+            }
           }
         }
       },
@@ -58,13 +58,13 @@
               "required": true
             },
             {
-                "name": "note",
-                "in": "body",
-                "description": "Update a note",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/CreateNote"
-                }
+              "name": "note",
+              "in": "body",
+              "description": "Update a note",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UpdateNote"
+              }
             }
           ],
           "responses": {
@@ -82,41 +82,90 @@
             }
           }
         }
-      }
-    },
-    "definitions": {
-        "CreateNote": {
-            "type": "object",
-            "required": [
-              "title"
-            ],
-            "properties": {
-              "title": {
-                "type": "string"
-              },
-              "content": {
-                "type": "string"
+      },
+      "/api/v1/notes/": {
+        "get": {
+          "summary": "Get all notes",
+          "operationId": "getNotes",
+          "parameters": [
+            
+          ],
+          "responses": {
+            "success": {
+              "description": "Get all notes",
+              "schema": {
+                "example": [
+                  {
+                    "title": "Note1",
+                    "content": "Note1 content",
+                    "notesId": "N_db231277-701d-4a92-9c87-59a0743f200e",
+                    "createdAt": "2021-06-20T04:08:11.418Z",
+                    "updatedAt": "2021-06-20T04:08:11.418Z"
+                  },
+                  {
+                    "title": "Note2",
+                    "content": "Note2 content",
+                    "notesId": "N_86ca8056-5338-4476-933c-8ca59fb7841f",
+                    "createdAt": "2021-06-20T23:33:55.361Z",
+                    "updatedAt": "2021-06-21T00:26:24.957Z"
+                  }
+                ]
               }
             }
-          },
-      "Query": {
-        "required": [
-          "startTime",
-          "endTime"
-        ],
-        "properties": {
-          "startTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "sorting": {
-            "type": "string"
+          }
+        },
+        "delete": {
+            "summary": "Delete one or more notes by noteIds",
+            "operationId": "deleteNotes",
+            "parameters": [
+              {
+                "name": "notesIds",
+                "in": "body",
+                "description": "array of noteIds to be deleted",
+                "required": true,
+                "type": "array",
+                "items": {
+                  "type": "{{notesId}}"
+                }
+              }
+            ],
+            "responses": {
+              "success": {
+                "description": "Deletes specified notes"
+              }
+            }
+          }
+        }
+      },
+      "definitions": {
+        "CreateNote": {
+          "type": "object",
+          "required": [
+            "title"
+          ],
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          }
+        },
+        "UpdateNote": {
+          "type": "object",
+          "required": [
+            "title"
+          ],
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
           }
         }
       }
     }
-  }
+  

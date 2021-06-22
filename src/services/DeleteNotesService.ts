@@ -5,7 +5,7 @@ export default async (
     requestId: string,
     userId: string
   ): Promise<void> => {
-    const {notesIds}: {notesIds: Array<GENERAL.NOTES_UUID>} = requestPayload;
+    const {notesIds}: {notesIds: GENERAL.NOTES_UUID[]} = requestPayload;
     await deleteNotes(notesIds, userId);
   };
   

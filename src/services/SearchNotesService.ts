@@ -6,10 +6,10 @@ export default async (
     userId: string
   ): Promise<REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE[]> => {
     const { search } = requestPayload;
-    console.log(requestId + " search note by string =" + search);
-    let searchResults: MODELS.NOTE[] = await searchNotes(search.toLowerCase(), userId);
-    //const responseArray: REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE[] = searchResults.map(({searchWords, id: notesId, ...keepAttrs}) => {keepAttrs} )
-    let responseArray = searchResults.map(function(note) {
+    console.log(`RequestID=${requestId}, search note by string ${search}`);
+    const searchResults: MODELS.NOTE[] = await searchNotes(search.toLowerCase(), userId);
+    // const responseArray: REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE[] = searchResults.map(({searchWords, id: notesId, ...keepAttrs}) => {keepAttrs} )
+    const responseArray = searchResults.map((note) => {
         return {
             notesId: note.id,
             title: note.title,
