@@ -11,7 +11,7 @@ You should be able to search notes.
 The notes should be persisted and retrieved via the service.
 
 ## Prerequisites
-Node>=11.6.0 <br/>
+Node>=12.0.0 <br/>
 
 ## Build
 `npm install`
@@ -23,12 +23,13 @@ Node>=11.6.0 <br/>
 `npm start`
 
 *Server will start on port 9997*
+<br/>The base path of the server is `/api/v1/notes/`
 
 ## Spec
 Swagger link - http://localhost:9997/swagger
 
 ## Postman collection
-<a href="Notes-App.postman_collection.json" download>Postman collection download</a>
+<a href="Notes-App.postman_collection.json" download>Postman collection download</a><br/>
 <a href="NotesApp-Local.postman_environment.json" download>Postman Environment download</a>
 
 ### Technical Details
@@ -65,6 +66,12 @@ From the value of `Authorization` header, the code can be written to retrieve th
 the `interceptor` implementation can be swapped with the real authentication logic.
 3. For note update, delete and read operations, userId associated with the note is checked against the userId passed from the `interceptor`. This ensures that only notes belonging to the correct user are updated.
 
+### Updating a note
+
+A note can be updated by providing the {notesId} as a path parameter.<br/>
+Both `title` and `content` will be replaced.<br/>
+Did not implement a PATCH api (for partial update) because usually the app UI will display the title and content to the user and allow to edit and save, so the entire note object can be passed to the server for an update.
+
 ### Searching notes
 
 1. Allows to search by prefix for any word in the `title` or `content` of the note. For e.g. if the title is `This is my first note` and if the search string is `firs` then this note will be returned in the search result.
@@ -72,3 +79,15 @@ the `interceptor` implementation can be swapped with the real authentication log
 
 ### Search Implementation Details
 
+1. During the create/update of a note, the server will split the text by a space returning an array of words (words in title and content).
+2. When persisting the note, this array of words is stored. 
+3. When the search by prefix api is called, then for each note we check if atleast 1 word has that prefix. If yes, the note is selected
+4. If there are `n` number of notes for a given user, and average `k` words per note. The search complexity is `n*k`.</br>
+</br>
+A typical way to optimize prefix search is using a "Trie" data structure.
+"Trie" will have a root node and next letter in the word is its child and so on.
+Usually this is useful for searching through a dataset with millions of records.</br>
+</br>
+In this case, Trie is an overkill because of the assumption that a given user would not typically have millions of notes. </br>
+</br>
+Another way to implement search can be a complete client-side search. The server will always return ALL notes for the logged-in user. And, instead of a network call when user types each character in the search box, frontend logic can filter / match the notes.
