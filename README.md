@@ -1,14 +1,14 @@
-_**Notes App Server**_ is a Nodejs application to manage notes a user.
+_**Notes App Server**_ is a Nodejs application to manage notes for a user.
   
 
 ## Requirements
 
-You should be able to return all notes.
-You should be able to add one or more notes.
-You should be able to edit a note.
-You should be able to delete one or more notes.
-You should be able to search notes.
-The notes should be persisted and retrieved via the service.
+You should be able to return all notes.<br/>
+You should be able to add one or more notes.<br/>
+You should be able to edit a note.<br/>
+You should be able to delete one or more notes.<br/>
+You should be able to search notes.<br/>
+The notes should be persisted and retrieved via the service.<br/>
 
 ## Prerequisites
 Node>=12.0.0 <br/>
@@ -49,9 +49,9 @@ Note model
 "title" is a required field when creating or updating a note.
 
 The user can create multiple notes with the same title. 
-Internally, the server generates a unique identifier everytime a note is created.
+Internally, the server generates a unique identifier everytime note is created.
 
-### X-Request-Id
+#### X-Request-Id Response Header
 
 Each request is intercepted and a unique "shortId" is generated that represents each request for traceability (for e.g. this microservice calls another ms then request-id will be passed along). 
 Any logging produced will have the corresponding request-id associated for better troubleshooting.
@@ -81,13 +81,15 @@ Did not implement a PATCH api (for partial update) because usually the app UI wi
 
 1. During the create/update of a note, the server will split the text by a space returning an array of words (words in title and content).
 2. When persisting the note, this array of words is stored. 
-3. When the search by prefix api is called, then for each note we check if atleast 1 word has that prefix. If yes, the note is selected
+3. When the search by prefix api is called, then for each note we check if at least 1 word has that prefix. If yes, the note is selected
 4. If there are `n` number of notes for a given user, and average `k` words per note. The search complexity is `n*k`.</br>
 </br>
 A typical way to optimize prefix search is using a "Trie" data structure.
 "Trie" will have a root node and next letter in the word is its child and so on.
+With trie, the search complexity is linear (same as prefix). </br>
+
 Usually this is useful for searching through a dataset with millions of records.</br>
 </br>
-In this case, Trie is an overkill because of the assumption that a given user would not typically have millions of notes. </br>
+In this case, Trie is overkill because of the assumption that a given user would not typically have millions of notes. </br>
 </br>
 Another way to implement search can be a complete client-side search. The server will always return ALL notes for the logged-in user. And, instead of a network call when user types each character in the search box, frontend logic can filter / match the notes.

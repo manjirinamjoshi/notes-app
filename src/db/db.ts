@@ -1,23 +1,16 @@
-/*type Data = {
-    notes: MODELS.NOTE[] // Expect notes to be an array of strings
-}
-*/
-
-// import { join } from 'path'
-// import {lowdb} from 'lowdb';
 import { ValueNotFoundError } from "../core/errors";
 const lowdb = require('lowdb')
 const fileSync = require('lowdb/adapters/FileSync')
 
-const adapter = new fileSync('db.json')
+const dbFile = process.env.isTest ? 'unit_test_db.json' : 'db.json';
+const adapter = new fileSync(dbFile);
 const db = lowdb(adapter)
 
 import * as lodash from 'lodash'
 // Note: db.data needs to be initialized before lodash.chain is called.
 db.chain = lodash.chain(db.data);
 
-db.defaults({ notes: [] })
-  .write();
+db.defaults({ notes: [] }).write();
 
 export const createNote = async (
     item: MODELS.NOTE

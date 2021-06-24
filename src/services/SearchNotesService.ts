@@ -8,7 +8,6 @@ export default async (
     const { prefix } = requestPayload;
     console.log(`RequestID=${requestId}, search note by string ${prefix}`);
     const searchResults: MODELS.NOTE[] = await searchNotes(prefix.toLowerCase(), userId);
-    // const responseArray: REQUESTS.NOTE_SEARCH_SUCCESS_RESPONSE[] = searchResults.map(({searchWords, id: notesId, ...keepAttrs}) => {keepAttrs} )
     const responseArray = searchResults.map((note) => {
         return {
             notesId: note.id,
