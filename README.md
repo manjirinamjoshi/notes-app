@@ -12,14 +12,14 @@ The notes should be persisted and retrieved via the service.<br/>
 
 ## Prerequisites
 Node>=12.0.0 <br/>
+`Note` - This application has been developed and tested on MacOS.<br/>
+If you want to run on another OS and run into build or run issues please use the docker image. <br/>
+This is a dockerized application, and instruction to build and run the docker is provided below.
 
 ## Build
 Go to the root of the project <br/>
 `npm install` <br/>
 `npm run build`
-
-## Run tests
-`npm test`
 
 ## Usage
 `npm start`
@@ -41,6 +41,9 @@ Swagger link - http://localhost:9997/swagger
 `docker run -d -p 9997:9997 manjirinamjoshi/notes-app:1.0`
 
 Access - `http://localhost:9997/swagger`
+
+## Run tests
+`npm test`
 
 ### Technical Details
 
@@ -103,3 +106,14 @@ Usually this is useful for searching through a dataset with millions of records.
 In this case, Trie is overkill because of the assumption that a given user would not typically have millions of notes. </br>
 </br>
 Another way to implement search can be a complete client-side search. The server will always return ALL notes for the logged-in user. And, instead of a network call when user types each character in the search box, frontend logic can filter / match the notes.
+
+
+### Idempotent APIs
+
+`Update` note and `Delete` note(s) are idempotent apis.<br/>
+If, PUT Update api is called multiple times, it has the same effect, the same note is updated (overwritten). <br/>
+If, DELETE api is called multiple times, the response is 204 because state of the db doesnt change. First time the note is deleted and subsequent calls have the same effect.<br/>
+<br/>
+POST `Create` api is NOT idempotent. If Create is called several times, multiple notes will get created (with same title and content if same payload is used several times).
+
+
