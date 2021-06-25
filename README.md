@@ -14,7 +14,8 @@ The notes should be persisted and retrieved via the service.<br/>
 Node>=12.0.0 <br/>
 
 ## Build
-`npm install`
+Go to the root of the project <br/>
+`npm install` <br/>
 `npm run build`
 
 ## Run tests
@@ -32,6 +33,14 @@ Swagger link - http://localhost:9997/swagger
 ## Postman collection
 <a href="Notes-App.postman_collection.json" download>Postman collection download</a><br/>
 <a href="NotesApp-Local.postman_environment.json" download>Postman Environment download</a>
+
+
+## Run as Docker Container
+
+`docker build -t manjirinamjoshi/notes-app:1.0 .` <br/>
+`docker run -d -p 9997:9997 manjirinamjoshi/notes-app:1.0`
+
+Access - `http://localhost:9997/swagger`
 
 ### Technical Details
 
