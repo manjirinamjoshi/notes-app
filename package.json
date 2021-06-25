@@ -7,7 +7,6 @@
     "start": "nodemon",
     "debug": "node --inspect=9229 -r ts-node/register  ./src/index.ts",
     "build": "tsc",
-    "prebuild": "npm run lint; npm run prettier",
     "test": "isTest=true jest --coverage",
     "test:coverage": "PORT=8585 jest --coverage --forceExit",
     "test:watch": "PORT=8585 jest --watch",

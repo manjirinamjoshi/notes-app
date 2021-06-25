@@ -15,6 +15,7 @@ Node>=12.0.0 <br/>
 
 ## Build
 `npm install`
+`npm run build`
 
 ## Run tests
 `npm test`
