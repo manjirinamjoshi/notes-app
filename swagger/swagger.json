@@ -114,28 +114,6 @@
             }
           }
         },
-        "post": {
-          "summary": "Search notes by prefix",
-          "operationId": "searchNotes",
-          "parameters": [
-            {
-              "name": "prefix",
-              "in": "body",
-              "description": "prefix of any word to be searched in title or content of the note",
-              "required": true,
-              "type": "string",
-              "default": "cont",
-              "schema": {
-                "$ref": "#/definitions/SearchNotes"
-              }
-            }
-          ],
-          "responses": {
-            "success": {
-              "description": "Returns notes containing words with the specified prefix in either title or content"
-            }
-          }
-        },
         "delete": {
             "summary": "Delete one or more notes by noteIds",
             "operationId": "deleteNotes",
@@ -157,6 +135,30 @@
             "responses": {
               "success": {
                 "description": "Deletes specified notes"
+              }
+            }
+          }
+        },
+        "/api/v1/notes/search": {
+          "post": {
+            "summary": "Search notes by prefix",
+            "operationId": "searchNotes",
+            "parameters": [
+              {
+                "name": "prefix",
+                "in": "body",
+                "description": "prefix of any word to be searched in title or content of the note",
+                "required": true,
+                "type": "string",
+                "default": "cont",
+                "schema": {
+                  "$ref": "#/definitions/SearchNotes"
+                }
+              }
+            ],
+            "responses": {
+              "success": {
+                "description": "Returns notes containing words with the specified prefix in either title or content"
               }
             }
           }
