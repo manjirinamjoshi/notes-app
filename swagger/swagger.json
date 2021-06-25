@@ -114,6 +114,28 @@
             }
           }
         },
+        "post": {
+          "summary": "Search notes by prefix",
+          "operationId": "searchNotes",
+          "parameters": [
+            {
+              "name": "prefix",
+              "in": "body",
+              "description": "prefix of any word to be searched in title or content of the note",
+              "required": true,
+              "type": "string",
+              "default": "cont",
+              "schema": {
+                "$ref": "#/definitions/SearchNotes"
+              }
+            }
+          ],
+          "responses": {
+            "success": {
+              "description": "Returns notes containing words with the specified prefix in either title or content"
+            }
+          }
+        },
         "delete": {
             "summary": "Delete one or more notes by noteIds",
             "operationId": "deleteNotes",
@@ -125,7 +147,10 @@
                 "required": true,
                 "type": "array",
                 "items": {
-                  "type": "{{notesId}}"
+                  "type": "string"
+                },
+                "schema": {
+                  "$ref": "#/definitions/DeleteNotes"
                 }
               }
             ],
@@ -145,10 +170,12 @@
           ],
           "properties": {
             "title": {
-              "type": "string"
+              "type": "string",
+              "default": "test title"
             },
             "content": {
-              "type": "string"
+              "type": "string",
+              "default": "test content"
             }
           }
         },
@@ -159,10 +186,36 @@
           ],
           "properties": {
             "title": {
-              "type": "string"
+              "type": "string",
+              "default": "update test title"
             },
             "content": {
-              "type": "string"
+              "type": "string",
+              "default": "update test content"
+            }
+          }
+        },
+        "SearchNotes": {
+          "type": "object",
+          "required": [
+            "prefix"
+          ],
+          "properties": {
+            "prefix": {
+              "type": "string",
+              "default": "cont"
+            }
+          }
+        },
+        "DeleteNotes": {
+          "type": "object",
+          "required": [
+            "noteIds"
+          ],
+          "properties": {
+            "noteIds": {
+              "type": "array",
+              "default": [""]
             }
           }
         }
