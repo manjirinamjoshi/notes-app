@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+      "skipLibCheck": true,
       "types": ["jest", "mocha", "node"],
       "module": "commonjs",
       "target": "es6",
@@ -20,7 +21,8 @@
         "routes/*": ["routes/*"],
         "services/*": ["services/*"],
         "utils/*": ["utils/*"],
-        "db/*": ["db/*"]
+        "db/*": ["db/*"],
+        "@types/*": ["@types/*"]
       }
     },
     "include": ["src/**/*"],
